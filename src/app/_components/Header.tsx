@@ -11,7 +11,7 @@ export const Header = () => {
       </div>
       <div className="flex gap-3 ">
         <div className="rounded-full size-10 bg-blue-500 "></div>
-        <p className="flex py-1.5 font-semibold text-[14px] ">Mugi</p>
+        <p className="flex py-1.5 font-semibold text-[14px] ">Jake</p>
         <div className="mx-10 py-1.5">
           <ChevronDownIcon />
         </div>

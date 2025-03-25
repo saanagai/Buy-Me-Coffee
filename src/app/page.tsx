@@ -2,6 +2,7 @@ import Image from "next/image";
 import { Header } from "./_components/Header";
 import { CoverImage } from "./_components/CoverImage";
 import { DonationCards } from "./_components/DonationCard";
+import { AboutJake } from "./_components/AboutJake";
 
 export default function Home() {
   const amounts = [1, 2, 5, 10];
@@ -9,7 +10,10 @@ export default function Home() {
     <div>
       <Header />
       <CoverImage />
-      <DonationCards amounts={amounts} />
+      <div className="flex w-full gap-4">
+        <AboutJake />
+        <DonationCards amounts={amounts} />
+      </div>
     </div>
   );
 }
