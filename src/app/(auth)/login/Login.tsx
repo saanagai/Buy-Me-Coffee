@@ -9,7 +9,6 @@ import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -18,21 +17,15 @@ import {
 import { Input } from "@/components/ui/input";
 import { useRouter } from "next/navigation";
 
+import { toast } from "sonner";
+
 const formSchema = z.object({
   email: z
     .string()
     .email("Invailed email. Use a format like example@email.com"),
   password: z.string().min(2).max(50),
 });
-const Step2 = ({
-  username,
-  setCurrentSlide,
-  currentSlide,
-}: {
-  username: string;
-  setCurrentSlide: () => void;
-  currentSlide: number;
-}) => {
+export const Login = () => {
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -43,9 +36,28 @@ const Step2 = ({
   });
   const router = useRouter();
   // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    const loginProfile = async () => {
+      const res = await fetch("api/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: values.email,
+
+          password: values.password,
+        }),
+      });
+      const data = await res.json();
+      if (data.user) {
+        router.push("/profile");
+      }
+      console.log(data);
+    };
+
+    loginProfile();
     console.log(values);
-    router.push("/login");
   }
   return (
     <div className="w-screen h-screen flex">
@@ -58,6 +70,7 @@ const Step2 = ({
           <div className="bg-amber-600 rounded-full size-55 flex justify-center overflow-hidden">
             <img src="/logo.png" width={190} height={150}></img>
           </div>
+
           <p className="font-700 text-[24px]">Fund your creative work</p>
           <p className="text-[16px]">
             Accept support. Start a membership. It's easier than you think.
@@ -66,11 +79,11 @@ const Step2 = ({
       </div>
       <div className="w-[50%] justify-center items-center">
         <div className="flex justify-end">
-          <Button onClick={() => router.push("/login")}>Log in</Button>
+          <Button onClick={() => router.push("/signUp")}>Sign up</Button>
         </div>
         <div className=" w-full h-full  text-[24px] font-bold  flex flex-col gap-10 justify-center items-center">
-          <div className="w-[407px] ">
-            <p>Welcome, {username}</p>
+          <div className="w-[407px]">
+            <p>Welcome back</p>
             <Form {...form}>
               <form
                 onSubmit={form.handleSubmit(onSubmit)}
@@ -80,14 +93,12 @@ const Step2 = ({
                   control={form.control}
                   name="email"
                   render={({ field }) => (
-                    <FormItem className="flex flex-col gap-6">
-                      <FormDescription>
-                        Connect email and set a password
-                      </FormDescription>
+                    <FormItem>
                       <FormLabel>Email</FormLabel>
                       <FormControl>
                         <Input placeholder="Enter email here" {...field} />
                       </FormControl>
+
                       <FormMessage />
                     </FormItem>
                   )}
@@ -96,16 +107,22 @@ const Step2 = ({
                   control={form.control}
                   name="password"
                   render={({ field }) => (
-                    <FormItem className="flex flex-col gap-6">
+                    <FormItem>
                       <FormLabel>Password</FormLabel>
                       <FormControl>
                         <Input placeholder="Enter password here" {...field} />
                       </FormControl>
+
                       <FormMessage />
                     </FormItem>
                   )}
                 />
-                <Button className="w-full" type="submit">
+
+                <Button
+                  className="w-full"
+                  type="submit"
+                  onClick={() => toast("password buruu baina")}
+                >
                   Continue
                 </Button>
               </form>
@@ -116,4 +133,3 @@ const Step2 = ({
     </div>
   );
 };
-export default Step2;

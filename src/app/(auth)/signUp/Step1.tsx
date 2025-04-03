@@ -17,10 +17,12 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Dispatch, SetStateAction } from "react";
+import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
   username: z.string().min(2).max(50),
 });
+
 const Step1 = ({
   setUserName,
   setCurrentSlide,
@@ -30,6 +32,7 @@ const Step1 = ({
   setCurrentSlide: () => void;
   currentSlide: number;
 }) => {
+  const router = useRouter();
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -63,7 +66,7 @@ const Step1 = ({
       </div>
       <div className="w-[50%] justify-center items-center">
         <div className="flex justify-end">
-          <Button>Log in</Button>
+          <Button onClick={() => router.push("/login")}>Log in</Button>
         </div>
         <div className=" w-full h-full  text-[24px] font-bold  flex flex-col gap-10 justify-center items-center">
           <div className="w-[407px] ">
