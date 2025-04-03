@@ -3,6 +3,7 @@ import { use, useEffect, useState } from "react";
 import { Header } from "./_components/Header";
 import { Logo } from "./_components/Logo";
 
+
 export default function Home() {
   const [data, setData] = useState<{ data: string } | null>(null);
   useEffect(() => {
