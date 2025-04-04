@@ -1,5 +1,4 @@
 "use client";
-import { Coffee } from "lucide-react";
 import { z } from "zod";
 
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -17,6 +16,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useRouter } from "next/navigation";
+import CoffeeLogo from "@/app/_components/CoffeeLogo";
 
 const formSchema = z.object({
   email: z
@@ -50,10 +50,7 @@ const Step2 = ({
   return (
     <div className="w-screen h-screen flex">
       <div className="w-[50%] h-full bg-[#FBBF24] ">
-        <div className=" flex gap-3 font-bold ">
-          <Coffee />
-          <p>Buy Me Coffee</p>
-        </div>
+        <CoffeeLogo />
         <div className="w-full h-full flex flex-col justify-center items-center">
           <div className="bg-amber-600 rounded-full size-55 flex justify-center overflow-hidden">
             <img src="/logo.png" width={190} height={150}></img>
@@ -66,7 +63,9 @@ const Step2 = ({
       </div>
       <div className="w-[50%] justify-center items-center">
         <div className="flex justify-end">
-          <Button onClick={() => router.push("/login")}>Log in</Button>
+          <Button onClick={() => router.push("/login")} variant={"secondary"}>
+            Log in
+          </Button>
         </div>
         <div className=" w-full h-full  text-[24px] font-bold  flex flex-col gap-10 justify-center items-center">
           <div className="w-[407px] ">
@@ -105,7 +104,7 @@ const Step2 = ({
                     </FormItem>
                   )}
                 />
-                <Button className="w-full" type="submit">
+                <Button className="w-full" type="submit" variant={"secondary"}>
                   Continue
                 </Button>
               </form>

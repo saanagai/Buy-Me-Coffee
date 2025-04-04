@@ -1,8 +1,6 @@
 "use client";
-import { use, useEffect, useState } from "react";
-import { Header } from "./_components/Header";
+import { useEffect, useState } from "react";
 import { Logo } from "./_components/Logo";
-
 
 export default function Home() {
   const [data, setData] = useState<{ data: string } | null>(null);
@@ -15,7 +13,7 @@ export default function Home() {
   return (
     <div>
       {data?.data}
-      <Header />
+
       <Logo />
     </div>
   );

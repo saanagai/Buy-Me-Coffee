@@ -18,6 +18,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Dispatch, SetStateAction } from "react";
 import { useRouter } from "next/navigation";
+import CoffeeLogo from "@/app/_components/CoffeeLogo";
 
 const formSchema = z.object({
   username: z.string().min(2).max(50),
@@ -50,10 +51,7 @@ const Step1 = ({
   return (
     <div className="w-screen h-screen flex">
       <div className="w-[50%] h-full bg-[#FBBF24] ">
-        <div className=" flex gap-3 font-bold ">
-          <Coffee />
-          <p>Buy Me Coffee</p>
-        </div>
+        <CoffeeLogo />
         <div className="w-full h-full flex flex-col justify-center items-center">
           <div className="bg-amber-600 rounded-full size-55 flex justify-center overflow-hidden">
             <img src="/logo.png" width={190} height={150}></img>
