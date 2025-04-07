@@ -4,7 +4,7 @@ export const CoffeeLogo = () => {
   return (
     <div className=" flex gap-3 font-bold w-56">
       <Coffee className="size-6" />
-      <p>Buy Me Coffee</p>
+      <span className="font-medium">Buy Me Coffee</span>
     </div>
   );
 };

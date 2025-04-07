@@ -1,5 +1,5 @@
 "use client";
-import { Camera } from "lucide-react";
+import { Camera, X } from "lucide-react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -13,7 +13,6 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import { imageUpload } from "@/util/imageAdd";
 import { Textarea } from "@/components/ui/textarea";
 import Image from "next/image";
@@ -37,7 +36,7 @@ const formSchema = z.object({
 export const ProfileSteps = () => {
   const [profileImgFile, setProfileImgFile] = useState<File | null>(null);
   const [previewURL, setPreviewURL] = useState<string | StaticImport>("");
-  const router = useRouter;
+
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -69,16 +68,35 @@ export const ProfileSteps = () => {
   };
   const deleteHandler = () => {
     return setPreviewURL("");
-    setProfileImgFile(null);
+    // setProfileImgFile(null);
   };
   return (
     <div className="w-96 m-auto gap-3">
       <h5 className="font-medium text-[20px]">Complete your profile page</h5>
       <div>
         <p>Add photo</p>
-        <div className="size-25  border-dashed border-1 rounded-full flex justify-center pt-8">
-          <Camera />
-          {/* <Image alt="" src={previewURL} width={100} height={100}></Image> */}
+        <div className="rounded-full border-2 border-dashed w-[160px] h-[160px] flex justify-center items-center overflow-hidden">
+          {previewURL ? (
+            <div className="flex justify-center items-center">
+              <Image alt="" src={previewURL} width={160} height={160}></Image>
+              <Button
+                type="button"
+                className="absolute bg-white rounded-full w-[30px] h-[30px]"
+                onClick={deleteHandler}
+              >
+                <X className="absolute" color="red" />
+              </Button>
+            </div>
+          ) : (
+            <div className="flex justify-center items-center">
+              <Input
+                type="file"
+                className="rounded-full w-full h-full border-0 opacity-0 z-200"
+                onChange={inputHandler}
+              />
+              <Camera className="absolute opacity-30" />
+            </div>
+          )}
         </div>
       </div>
 

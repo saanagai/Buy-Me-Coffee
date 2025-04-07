@@ -12,10 +12,16 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import { imageUpload } from "@/util/imageAdd";
 import { StaticImport } from "next/dist/shared/lib/get-img-props";
 import { ChevronDown } from "lucide-react";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 const formSchema = z.object({
   addPhoto: z
@@ -35,7 +41,6 @@ const formSchema = z.object({
 export const PaymentForm = () => {
   const [profileImgFile, setProfileImgFile] = useState<File | null>(null);
   const [previewURL, setPreviewURL] = useState<string | StaticImport>("");
-  const router = useRouter;
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -88,7 +93,17 @@ export const PaymentForm = () => {
               <FormItem>
                 <FormLabel>Select country</FormLabel>
                 <FormControl>
-                  <Input placeholder="Select" {...field} />
+                  {/* <Input placeholder="Select" {...field} /> */}
+                  <Select>
+                    <SelectTrigger className="w-[385px]">
+                      <SelectValue placeholder="Select" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="us">United States</SelectItem>
+                      <SelectItem value="au">Australia</SelectItem>
+                      <SelectItem value="mn">Mongolia</SelectItem>
+                    </SelectContent>
+                  </Select>
                 </FormControl>
                 <div className="flex gap-5">
                   <div>
