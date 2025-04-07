@@ -34,7 +34,7 @@ const formSchema = z.object({
     .url({ message: "Please enter a social link" }),
 });
 
-export const ProfileStep1 = () => {
+export const ProfileSteps = () => {
   const [profileImgFile, setProfileImgFile] = useState<File | null>(null);
   const [previewURL, setPreviewURL] = useState<string | StaticImport>("");
   const router = useRouter;
@@ -78,7 +78,7 @@ export const ProfileStep1 = () => {
         <p>Add photo</p>
         <div className="size-25  border-dashed border-1 rounded-full flex justify-center pt-8">
           <Camera />
-          <Image alt="" src={previewURL} width={100} height={100}></Image>
+          {/* <Image alt="" src={previewURL} width={100} height={100}></Image> */}
         </div>
       </div>
 
@@ -113,4 +113,4 @@ export const ProfileStep1 = () => {
   );
 };
 
-export default ProfileStep1;
+export default ProfileSteps;
