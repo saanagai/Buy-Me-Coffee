@@ -8,7 +8,7 @@ import { ProfileSteps } from "./ProfileSteps";
 import PaymentForm from "./PaymentForm";
 
 const CreateProfilePage = () => {
-  const [name, setName] = useState("");
+  // const [name, setName] = useState("");
   const [currentSlide, setCurrent] = useState(0);
   const ProfileSection = [ProfileSteps, PaymentForm][currentSlide];
   const router = useRouter();

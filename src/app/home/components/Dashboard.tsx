@@ -2,10 +2,16 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { Bell } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 export default function Dashboard() {
   const [activeTab, setActiveTab] = useState("earnings");
@@ -16,14 +22,23 @@ export default function Dashboard() {
         <div className="flex items-center justify-between mb-6">
           <h1 className="text-2xl font-bold">Earnings</h1>
           <Button variant="outline" className="gap-2">
-            Create Card Link
+            Share page link
           </Button>
         </div>
 
         <Tabs defaultValue="earnings" className="w-full">
           <TabsList className="mb-4">
             <TabsTrigger value="earnings">Earnings</TabsTrigger>
-            <TabsTrigger value="last-30-days">Last 30 Days</TabsTrigger>
+            <Select>
+              <SelectTrigger className="w-[180px]">
+                <SelectValue placeholder="Last 30 days" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="light">Last 30 days</SelectItem>
+                <SelectItem value="dark">Last 90 days</SelectItem>
+                <SelectItem value="system">All time</SelectItem>
+              </SelectContent>
+            </Select>
           </TabsList>
           <TabsContent value="earnings" className="space-y-4">
             <Card>

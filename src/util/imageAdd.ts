@@ -1,19 +1,16 @@
-"use client";
-
 export const imageUpload = async (file: File | null) => {
   if (!file) {
     alert("Please select a file");
     return;
   }
-  
 
   const PRESET_NAME = process.env.PRESET_NAME;
   const CLOUDINARY_NAME = process.env.CLOUDINARY_NAME;
-  
+
   if (!PRESET_NAME || !CLOUDINARY_NAME) {
     alert("Missing environment variables");
     return;
-  }  
+  }
 
   const formData = new FormData();
   formData.append("file", file);
@@ -21,7 +18,7 @@ export const imageUpload = async (file: File | null) => {
 
   try {
     const res = await fetch(
-      `https://api.cloudinary.com/v1_1/${CLOUDINARY_NAME}/image/upload`,
+      `https://api.cloudinary.com/v1_1/${CLOUDINARY_NAME}/upload`,
       {
         method: "POST",
         body: formData,
