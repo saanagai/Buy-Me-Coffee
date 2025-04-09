@@ -43,7 +43,7 @@ export async function POST(req: Request): Promise<NextResponse> {
       );
     }
 
-    const checkUsername = `SELECT * FROM users WHERE username = $1`;
+    const checkUsername = `SELECT * FROM public.user WHERE username = $1`;
     const usernameExists = await runQuery(checkUsername, [username]);
 
     if (usernameExists && usernameExists.length > 0) {
@@ -56,7 +56,7 @@ export async function POST(req: Request): Promise<NextResponse> {
       );
     }
 
-    const checkEmail = `SELECT * FROM users WHERE email = $1`;
+    const checkEmail = `SELECT * FROM public.user WHERE email = $1`;
     const emailExists = await runQuery(checkEmail, [email]);
 
     if (emailExists && emailExists.length > 0) {
@@ -69,7 +69,7 @@ export async function POST(req: Request): Promise<NextResponse> {
       );
     }
 
-    const createUser = `INSERT INTO users (username, email, password) VALUES ($1, $2, $3) RETURNING id, username, email`;
+    const createUser = `INSERT INTO public.user (username, email, password) VALUES ($1, $2, $3) RETURNING id, username, email`;
     const result = await runQuery(createUser, [username, email, password]);
 
     return new NextResponse(
