@@ -1,10 +1,10 @@
 export type UserType = {
-  email: String;
-  // password:String
-  username: String;
-  // createdAt:Date
-  // profile:String
-  // updatedAt:Date
+  email: string;
+  password: string;
+  username: string;
+  createdAt: Date;
+  profile: string;
+  updatedAt: Date;
 };
 export type UserProfileType = {
   name: string;

@@ -38,7 +38,7 @@ export const Login = () => {
   // 2. Define a submit handler.
   async function onSubmit(values: z.infer<typeof formSchema>) {
     const loginProfile = async () => {
-      const res = await fetch("api/login", {
+      const res = await fetch("/api/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -110,7 +110,11 @@ export const Login = () => {
                     <FormItem>
                       <FormLabel>Password</FormLabel>
                       <FormControl>
-                        <Input placeholder="Enter password here" {...field} />
+                        <Input
+                          type={"password"}
+                          placeholder="Enter password here"
+                          {...field}
+                        />
                       </FormControl>
 
                       <FormMessage />
