@@ -1,11 +1,11 @@
+const PRESET_NAME = process.env.NEXT_PUBLIC_PRESET_NAME;
+const CLOUDINARY_NAME = process.env.NEXT_PUBLIC_CLOUDINARY_NAME;
+
 export const imageUpload = async (file: File | null) => {
   if (!file) {
     alert("Please select a file");
     return;
   }
-
-  const PRESET_NAME = process.env.NEXT_PUBLIC_PRESET_NAME;
-  const CLOUDINARY_NAME = process.env.NEXT_PUBLIC_CLOUDINARY_NAME;
 
   if (!PRESET_NAME || !CLOUDINARY_NAME) {
     alert("Missing environment variables");
