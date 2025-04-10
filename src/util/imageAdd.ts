@@ -1,5 +1,5 @@
-const PRESET_NAME = process.env.NEXT_PUBLIC_PRESET_NAME;
-const CLOUDINARY_NAME = process.env.NEXT_PUBLIC_CLOUDINARY_NAME;
+const PRESET_NAME = process.env.NEXT_PUBLIC_API_KEY_PRESET_NAME;
+const CLOUDINARY_NAME = process.env.NEXT_PUBLIC_API_KEY_CLOUDINARY_NAME;
 
 export const imageUpload = async (file: File | null) => {
   if (!file) {

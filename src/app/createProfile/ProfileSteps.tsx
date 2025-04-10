@@ -16,7 +16,7 @@ import { useState } from "react";
 import { imageUpload } from "@/util/imageAdd";
 import { Textarea } from "@/components/ui/textarea";
 import Image from "next/image";
-import { StaticImport } from "next/dist/shared/lib/get-img-props";
+import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
   addPhoto: z
@@ -35,7 +35,8 @@ const formSchema = z.object({
 
 export const ProfileSteps = () => {
   const [profileImgFile, setProfileImgFile] = useState<File | null>(null);
-  const [previewURL, setPreviewURL] = useState<string | StaticImport>("");
+  const [previewURL, setPreviewURL] = useState<string | null>(null);
+  const router = useRouter();
 
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
@@ -51,10 +52,22 @@ export const ProfileSteps = () => {
   // 2. Define a submit handler.
   async function onSubmit(values: z.infer<typeof formSchema>) {
     const imageURL = await imageUpload(profileImgFile);
-    // router.push(`/profile`);
-    console.log(values);
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
+    const createProfile = async () => {
+      const res = await fetch("/api/userProfile", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          addPhoto: imageURL,
+          name: values.name,
+          about: values.about,
+          social: values.social,
+        }),
+      });
+      const data = await res.json();
+      console.log("this", data);
+    };
+    createProfile();
+    router.push(`/profile`);
     console.log(values);
   }
   const inputHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -67,8 +80,9 @@ export const ProfileSteps = () => {
     setProfileImgFile(e.target.files[0]);
   };
   const deleteHandler = () => {
-    return setPreviewURL("");
-    // setProfileImgFile(null);
+    form.setValue("addPhoto", "");
+    setPreviewURL("");
+    setProfileImgFile(null);
   };
   return (
     <div className="w-96 m-auto gap-3">
